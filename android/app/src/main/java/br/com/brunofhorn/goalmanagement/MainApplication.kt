@@ -1,4 +1,4 @@
-package com.target
+package br.com.brunofhorn.goalmanagement
 
 import android.app.Application
 import android.content.res.Configuration

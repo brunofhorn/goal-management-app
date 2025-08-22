@@ -1,7 +1,22 @@
 {
   "expo": {
-    "name": "target",
-    "slug": "target",
-    "version": "1.0.0"
+    "name": "Goal Management",
+    "slug": "goal-management",
+    "version": "1.0.0",
+    "android": {
+      "package": "br.com.brunofhorn.goalmanagement",
+      "edgeToEdgeEnabled": true,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#3D44CD"
+      }
+    },
+    "ios": {
+      "bundleIdentifier": "br.com.brunofhorn.goalmanagement",
+      "icon": "./assets/ios-icon.png"
+    },
+    "plugins": [
+      "expo-router"
+    ]
   }
 }
