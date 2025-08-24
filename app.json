@@ -2,6 +2,7 @@
   "expo": {
     "name": "Goal Management",
     "slug": "goal-management",
+    "scheme": "goal-management",
     "version": "1.0.0",
     "android": {
       "package": "br.com.brunofhorn.goalmanagement",
@@ -16,7 +17,13 @@
       "icon": "./assets/ios-icon.png"
     },
     "plugins": [
-      "expo-router"
+      [
+        "expo-router",
+        {
+          "root": "./src/app"
+        }
+      ],
+      "expo-font"
     ]
   }
 }
