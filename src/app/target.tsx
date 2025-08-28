@@ -4,7 +4,7 @@ import { Input } from "@/components/Input";
 import { PageHeader } from "@/components/PageHeader";
 import { useTargetDatabase } from "@/database/useTargetDatabase";
 import { router, useLocalSearchParams } from "expo-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Alert, View } from "react-native";
 
 export default function Target() {
@@ -22,7 +22,7 @@ export default function Target() {
         setIsProcessing(true)
 
         if (params.id) {
-            // update
+            update()
         } else {
             create()
         }
@@ -31,7 +31,7 @@ export default function Target() {
     async function create() {
         try {
             await targetDatabase.create({ name, amount })
-            
+
             Alert.alert("Nova meta", "Nova meta criada com sucesso!", [
                 { text: 'Ok', onPress: () => router.back() }
             ])
@@ -42,6 +42,28 @@ export default function Target() {
         }
     }
 
+    async function update() {
+
+    }
+
+    async function fetchDetails(id: number) {
+        try {
+            const response = await targetDatabase.show(id)
+
+            setName(response.name)
+            setAmount(response.amount)
+        } catch (error) {
+            Alert.alert("Erro", "Não foi possível carregar os detalhes da meta.")
+            console.log(error)
+        }
+    }
+
+    useEffect(() => {
+        if (params.id) {
+            fetchDetails(Number(params.id))
+        }
+    }, [params.id])
+
     return (
         <View style={{ flex: 1, padding: 24 }}>
             <PageHeader title="Meta" subtitle="Economize para alcançar sua meta financeira." />
@@ -50,6 +72,7 @@ export default function Target() {
                 <Input
                     label="Nome da meta"
                     placeholder="Ex: Viagem para praia, Apple Watch"
+                    value={name}
                     onChangeText={setName}
                 />
 
